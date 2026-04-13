@@ -21,9 +21,6 @@ public class FTBXEmiCompatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.contains("Ambient")) {
-            return FabricLoader.getInstance().isModLoaded("ambientsounds");
-        }
         return true;
     }
 
