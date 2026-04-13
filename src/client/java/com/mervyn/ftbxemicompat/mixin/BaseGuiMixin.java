@@ -20,12 +20,12 @@ import java.util.Optional;
 public abstract class BaseGuiMixin {
 
     @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = true)
-    private void ftbxemicompat$keyPressed(Key key, CallbackInfoReturnable<Boolean> cir) {
+    private void ftbxemicompat_no_ambient$keyPressed(Key key, CallbackInfoReturnable<Boolean> cir) {
         // Plain key check: no control, no shift, no alt
         if (!key.modifiers.control() && !key.modifiers.shift() && !key.modifiers.alt() && (key.is(82) || key.is(85))) { // R or U
             Object self = this;
             if (self instanceof QuestScreen || self instanceof ValidItemsScreen) {
-                Widget widget = ftbxemicompat$getHoveredWidget((BaseScreen) self);
+                Widget widget = ftbxemicompat_no_ambient$getHoveredWidget((BaseScreen) self);
                 if (widget != null) {
                     Optional<PositionedIngredient> ingredient = widget.getIngredientUnderMouse();
                     if (ingredient.isPresent()) {
@@ -42,7 +42,7 @@ public abstract class BaseGuiMixin {
     }
 
     @Unique
-    private Widget ftbxemicompat$getHoveredWidget(Widget root) {
+    private Widget ftbxemicompat_no_ambient$getHoveredWidget(Widget root) {
         if (!root.isMouseOver()) {
             return null;
         }
@@ -50,7 +50,7 @@ public abstract class BaseGuiMixin {
             // Check widgets in reverse order (top-most first)
             var widgets = panel.getWidgets();
             for (int i = widgets.size() - 1; i >= 0; i--) {
-                Widget found = ftbxemicompat$getHoveredWidget(widgets.get(i));
+                Widget found = ftbxemicompat_no_ambient$getHoveredWidget(widgets.get(i));
                 if (found != null) {
                     return found;
                 }

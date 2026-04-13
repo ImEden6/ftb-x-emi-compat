@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FTBXEmiCompatMod implements ClientModInitializer {
-    public static final String MOD_ID = "ftbxemicompat";
+    public static final String MOD_ID = "ftbxemicompat-no-ambient";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override

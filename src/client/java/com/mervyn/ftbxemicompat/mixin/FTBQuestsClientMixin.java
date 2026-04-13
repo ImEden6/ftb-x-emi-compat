@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FTBQuestsClient.class)
 public class FTBQuestsClientMixin {
     @Inject(method = "init", at = @At("RETURN"))
-    private static void ftbxemicompat$init(CallbackInfo ci) {
+    private static void ftbxemicompat_no_ambient$init(CallbackInfo ci) {
         if (FabricLoader.getInstance().isModLoaded("emi")) {
             FTBQuests.setRecipeModHelper(new EMIRecipeModHelper());
         }

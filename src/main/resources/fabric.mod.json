@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "ftbxemicompat",
+	"id": "ftbxemicompat-no-ambient",
 	"version": "${version}",
 	"name": "FTB x EMI Compat",
 	"description": "Compatibility layer for FTB Quests and EMI.",
@@ -11,7 +11,7 @@
 		"homepage": "https://feed-the-beast.com/"
 	},
 	"license": "All Rights Reserved",
-	"icon": "assets/ftbxemicompat/icon.png",
+	"icon": "assets/ftbxemicompat-no-ambient/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"client": [
@@ -19,7 +19,7 @@
 		]
 	},
 	"mixins": [
-		"ftbxemicompat.mixins.json"
+		"ftbxemicompat-no-ambient.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.18.4",
