@@ -1,0 +1,80 @@
+plugins {
+	id "fabric-loom" version "${loom_version}"
+	id "maven-publish"
+}
+
+version = project.mod_version
+group = project.maven_group
+base.archivesName = project.archives_base_name
+
+repositories {
+	maven { url = "https://maven.architectury.dev/" }
+	maven { url = "https://maven.saps.dev/minecraft" }
+	maven { url = "https://maven.terraformersmc.com/releases/" }
+	maven { url = "https://www.cursemaven.com" }
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"ftbxemicompat" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:1.20.1+build.10:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	// FTB Quests and dependencies
+	modImplementation "curse.maven:ftb-quests-fabric-438496:6431736"
+	modImplementation "curse.maven:ftb-library-fabric-438495:6164052"
+	modImplementation "dev.architectury:architectury-fabric:9.2.14" // Required by FTB mods
+
+	// EMI
+	modImplementation "curse.maven:emi-580555:6420944"
+
+	// AmbientSounds and CreativeCore (Fix dependencies)
+	modCompileOnly "curse.maven:ambientsounds-254284:7550236"
+	modCompileOnly "curse.maven:creativecore-257814:7005657"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 17
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.archives_base_name}" }
+	}
+}
+
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
+		}
+	}
+	repositories {
+	}
+}

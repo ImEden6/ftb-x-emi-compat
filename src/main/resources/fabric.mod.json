@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "ftbxemicompat",
+	"version": "${version}",
+	"name": "FTB x EMI Compat",
+	"description": "Compatibility layer for FTB Quests and EMI.",
+	"authors": [
+		"mervyn"
+	],
+	"contact": {
+		"homepage": "https://feed-the-beast.com/"
+	},
+	"license": "All Rights Reserved",
+	"icon": "assets/ftbxemicompat/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"com.mervyn.ftbxemicompat.FTBXEmiCompatMod"
+		]
+	},
+	"mixins": [
+		"ftbxemicompat.mixins.json",
+		"ftbxemicompat.optional.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

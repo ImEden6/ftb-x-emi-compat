@@ -1,0 +1,13 @@
+{
+	"required": false,
+	"package": "com.mervyn.ftbxemicompat.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"plugin": "com.mervyn.ftbxemicompat.mixin.FTBXEmiCompatMixinPlugin",
+	"mixins": [
+		"AmbientTickHandlerMixin",
+		"AmbientEngineAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
