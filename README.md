@@ -1,4 +1,4 @@
-# FTB x EMI compat
+# FTB x EMI compat (Client-side)
 
 A compatibility layer providing integration between FTB mods (like FTB Quests) and the EMI (Item and Recipe Viewer).
 

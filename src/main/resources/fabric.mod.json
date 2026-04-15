@@ -12,7 +12,7 @@
 	},
 	"license": "All Rights Reserved",
 	"icon": "assets/ftbxemicompat/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"client": [
 			"com.mervyn.ftbxemicompat.FTBXEmiCompatMod"
