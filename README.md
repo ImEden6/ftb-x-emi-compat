@@ -1,6 +1,6 @@
 # FTB x EMI compat (Client-side)
 
-A compatibility layer providing integration between FTB mods (like FTB Quests) and the EMI (Item and Recipe Viewer).
+A compatibility layer providing integration between FTB Quests and the EMI (Item and Recipe Viewer) mod.
 
 ## Installation
 Just drop the jar file into your Minecraft **mods** folder.
