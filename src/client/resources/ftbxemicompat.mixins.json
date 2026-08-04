@@ -5,6 +5,7 @@
 	"plugin": "com.mervyn.ftbxemicompat.mixin.FTBXEmiCompatMixinPlugin",
 	"mixins": [
 		"FTBQuestsClientMixin",
+		"FTBQuestsRecipeModHelperMixin",
 		"BaseGuiMixin"
 	],
 	"injectors": {
