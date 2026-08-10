@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2026-08-10
+
+### Fixed
+
+- **Crash after reloading resources with AmbientSounds installed**: reloading resources (e.g. pressing F3+T) could leave ambient sounds in a broken state that crashed the game on every subsequent tick.
+
 ## [1.0.1] - 2026-08-04
 
 ### Fixed

@@ -3,6 +3,9 @@ package com.mervyn.ftbxemicompat.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import team.creative.ambientsounds.engine.AmbientEngine;
 import team.creative.ambientsounds.engine.AmbientTickHandler;
 import team.creative.creativecore.common.config.holder.CreativeConfigRegistry;
@@ -14,6 +17,7 @@ import team.creative.creativecore.reflection.ReflectionHelper;
 import team.creative.ambientsounds.region.AmbientRegion;
 import team.creative.ambientsounds.sound.AmbientSound;
 import team.creative.ambientsounds.sound.AmbientSoundCategory;
+import team.creative.ambientsounds.sound.AmbientSoundEngine;
 import team.creative.creativecore.CreativeCore;
 import team.creative.creativecore.Side;
 import net.minecraft.client.MinecraftClient;
@@ -27,11 +31,31 @@ public abstract class AmbientTickHandlerMixin {
     @Shadow
     public AmbientEngine engine;
     @Shadow
+    public AmbientSoundEngine soundEngine;
+    @Shadow
     private static MinecraftClient mc;
 
     @Shadow
     protected abstract void createSoundCategoryConfiguration(ConfigHolderDynamic parent, AmbientSoundCategory cat,
             Field categoryField);
+
+    /**
+     * @author Mervyn
+     * @reason Self-heal a race between the background resource-reload thread
+     *         (AmbientSounds#reloadAsync) writing {@code engine} and the client
+     *         tick thread reading it: a reload can publish a new AmbientEngine
+     *         whose soundEngine field the tick thread never re-syncs, leaving it
+     *         permanently null and crashing AmbientEngine#fastTick every tick.
+     */
+    @Inject(method = "onTick", at = @At("HEAD"), remap = false)
+    private void ftbxemicompat$fixNullSoundEngine(CallbackInfo ci) {
+        if (this.engine != null && this.engine.soundEngine == null) {
+            if (this.soundEngine == null) {
+                this.soundEngine = new AmbientSoundEngine();
+            }
+            this.engine.soundEngine = this.soundEngine;
+        }
+    }
 
     /**
      * @author Mervyn
